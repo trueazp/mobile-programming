@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "tugas2_H071191035"
