@@ -1,1 +1,1 @@
-#### Link download APK : https://drive.google.com/drive/folders/1Dy3KGCWljoGJvo2ATMvWSkW13yX9Bm1w?usp=sharing
+#### Link download APK : https://drive.google.com/file/d/1G6h1yRxBMhmhZYPI0NvW9Aspal0txBLq/view?usp=sharing
