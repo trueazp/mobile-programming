@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg2"
+    tools:context=".Details">
+
+    <TextView
+        android:id="@+id/tv_detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_margin="10dp"
+
+        android:fontFamily="sans-serif-condensed"
+        android:text="Title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_detail_genre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_margin="10dp"
+
+        android:fontFamily="sans-serif-condensed"
+        android:text="Genre"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_title"/>
+
+    <ImageView
+        android:id="@+id/iv_detail_poster"
+        android:layout_width="190dp"
+        android:layout_height="300dp"
+        android:layout_margin="10dp"
+
+        android:src="@drawable/bg1"
+
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_genre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_detail_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_margin="10dp"
+
+        android:fontFamily="sans-serif-condensed"
+        android:text="Description"
+        android:textStyle="bold"
+
+        app:layout_constraintTop_toBottomOf="@id/iv_detail_poster"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+
+        android:fontFamily="sans-serif-condensed"
+        android:text="Back"
+        android:textStyle="bold"
+        android:backgroundTint="#494848"
+        android:onClick="toMain"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
