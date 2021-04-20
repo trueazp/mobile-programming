@@ -7,76 +7,93 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg2"
     tools:context=".Details">
-
-    <TextView
-        android:id="@+id/tv_detail_title"
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_margin="10dp"
+        android:background="@drawable/bg1"
 
-        android:fontFamily="sans-serif-condensed"
-        android:text="Title"
-        android:textSize="24sp"
-        android:textStyle="bold"
-
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/tv_detail_genre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_margin="10dp"
-
-        android:fontFamily="sans-serif-condensed"
-        android:text="Genre"
-        android:textSize="20sp"
-        android:textStyle="bold"
-
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_title"/>
-
-    <ImageView
-        android:id="@+id/iv_detail_poster"
-        android:layout_width="190dp"
-        android:layout_height="300dp"
-        android:layout_margin="10dp"
-
-        android:src="@drawable/bg1"
-
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_genre"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:id="@+id/tv_detail_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_margin="10dp"
+        <TextView
+            android:id="@+id/tv_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_margin="10dp"
 
-        android:fontFamily="sans-serif-condensed"
-        android:text="Description"
-        android:textStyle="bold"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Title"
+            android:textSize="24sp"
+            android:textStyle="bold"
 
-        app:layout_constraintTop_toBottomOf="@id/iv_detail_poster"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
-    <Button
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        <TextView
+            android:id="@+id/tv_detail_genre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_margin="10dp"
 
-        android:fontFamily="sans-serif-condensed"
-        android:text="Back"
-        android:textStyle="bold"
-        android:backgroundTint="#494848"
-        android:onClick="toMain"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Genre"
+            android:textSize="20sp"
+            android:textStyle="bold"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_detail_title"/>
+
+        <ImageView
+            android:id="@+id/iv_detail_poster"
+            android:layout_width="190dp"
+            android:layout_height="300dp"
+            android:layout_margin="10dp"
+
+            android:src="@drawable/bg2"
+
+            app:layout_constraintTop_toBottomOf="@id/tv_detail_genre"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_detail_desc"
+            android:layout_width="370dp"
+            android:layout_height="250dp"
+            android:layout_margin="10dp"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+
+            android:scrollbars="vertical"
+            android:text="Description"
+            android:textStyle="bold"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_detail_poster" />
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
+            android:fontFamily="sans-serif-condensed"
+            android:text="Back"
+            android:textStyle="bold"
+            android:backgroundTint="#494848"
+            android:onClick="toMain"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

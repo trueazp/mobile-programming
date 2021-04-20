@@ -30,16 +30,16 @@ public class AnimeDatasource {
     };
 
     private static String[] animeGenre = {
-            "Genre: Fighting-Shounen",
-            "Genre: Action Drama",
-            "Genre: Crime Fiction, Thriller",
-            "Genre: Adventure",
-            "Genre: Action Drama",
-            "Genre: Adventure",
-            "Genre: Fighting-Shounen",
-            "Genre: Fighting-Shounen",
-            "Genre: Fighting-Shounen",
-            "Genre: Action Drama",
+            "Fighting-Shounen",
+            "Action Drama",
+            "Crime Fiction, Thriller",
+            "Adventure",
+            "Action Drama",
+            "Adventure",
+            "Fighting-Shounen",
+            "Fighting-Shounen",
+            "Fighting-Shounen",
+            "Action Drama",
     };
 
     private static int[] animePosters = {

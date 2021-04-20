@@ -23,7 +23,7 @@ public class Anime {
     }
 
     public String getGenre() {
-        return genre;
+        return "Genre: " + genre;
     }
 
     public void setGenre(String genre) {
