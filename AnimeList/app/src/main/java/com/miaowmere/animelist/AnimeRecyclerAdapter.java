@@ -13,9 +13,14 @@ import java.util.List;
 
 public class AnimeRecyclerAdapter extends RecyclerView.Adapter<AnimeRecyclerAdapter.ViewHolder> {
     private List<Anime> animes;
+    private OnItemClickCallback onItemClickCallback;
 
     public AnimeRecyclerAdapter(List<Anime> models) {
         this.animes = models;
+    }
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
     }
 
     @NonNull
@@ -33,6 +38,12 @@ public class AnimeRecyclerAdapter extends RecyclerView.Adapter<AnimeRecyclerAdap
         holder.tvAnimeTitle.setText(anime.getTitle());
         holder.tvAnimeGenre.setText(anime.getGenre());
         holder.tvAnimeDescription.setText(anime.getDescription());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(animes.get(position));
+            }
+        });
     }
 
 
@@ -54,5 +65,9 @@ public class AnimeRecyclerAdapter extends RecyclerView.Adapter<AnimeRecyclerAdap
             tvAnimeGenre = itemView.findViewById(R.id.tv_anime_genre);
             tvAnimeDescription = itemView.findViewById(R.id.tv_anime_desc);
         }
+    }
+
+    public interface OnItemClickCallback {
+        void onItemClicked(Anime anime);
     }
 }
