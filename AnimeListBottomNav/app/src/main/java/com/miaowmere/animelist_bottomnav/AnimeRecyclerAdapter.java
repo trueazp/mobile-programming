@@ -52,15 +52,11 @@ public class AnimeRecyclerAdapter extends RecyclerView.Adapter<AnimeRecyclerAdap
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             ivAnimePoster = itemView.findViewById(R.id.iv_anime_poster);
             tvAnimeTitle = itemView.findViewById(R.id.tv_anime_title);
             tvAnimeGenre = itemView.findViewById(R.id.tv_anime_genre);
             tvAnimeDescription = itemView.findViewById(R.id.tv_anime_desc);
-        }
-
-        @Override
-        public void onClick(View v) {
-            clickListener.onClick(anime);
         }
 
         public void onBind(Anime anime) {
@@ -69,6 +65,11 @@ public class AnimeRecyclerAdapter extends RecyclerView.Adapter<AnimeRecyclerAdap
             tvAnimeTitle.setText(anime.getTitle());
             tvAnimeGenre.setText(anime.getGenre());
             tvAnimeDescription.setText(anime.getDescription());
+        }
+
+        @Override
+        public void onClick(View v) {
+            clickListener.onClick(anime);
         }
     }
 }

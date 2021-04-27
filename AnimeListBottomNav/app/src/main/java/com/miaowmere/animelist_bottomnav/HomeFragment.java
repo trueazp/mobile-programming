@@ -3,6 +3,7 @@ package com.miaowmere.animelist_bottomnav;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +25,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener<Anime>
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
@@ -45,7 +46,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener<Anime>
 
     @Override
     public void onClick(Anime anime) {
-        Intent intent = new Intent(this.getActivity(), Details.class);
+        Intent intent = new Intent(getActivity(), Details.class);
         intent.putExtra(Details.details, anime);
         startActivity(intent);
     }

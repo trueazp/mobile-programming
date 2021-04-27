@@ -1,5 +1,5 @@
 package com.miaowmere.animelist_bottomnav;
 
-public interface OnItemClickListener<Anime> {
-    void onClick(Anime anime);
+public interface OnItemClickListener<T> {
+    void onClick(T t);
 }
