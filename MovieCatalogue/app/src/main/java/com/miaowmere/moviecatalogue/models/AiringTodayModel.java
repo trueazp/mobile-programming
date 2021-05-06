@@ -2,8 +2,10 @@ package com.miaowmere.moviecatalogue.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class NowPlayingModel {
+public class AiringTodayModel {
     private String id;
+
+    @SerializedName("name")
     private String title;
 
     @SerializedName("poster_path")

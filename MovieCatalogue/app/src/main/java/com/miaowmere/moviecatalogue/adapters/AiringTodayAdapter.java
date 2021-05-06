@@ -12,18 +12,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.miaowmere.moviecatalogue.models.NowPlayingModel;
+import com.miaowmere.moviecatalogue.models.AiringTodayModel;
 import com.miaowmere.moviecatalogue.networks.Const;
 import com.miaowmere.moviecatalogue.networks.OnItemClickListener;
 
 import java.util.List;
 
-public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.ViewHolder> {
-    private final List<NowPlayingModel> nowPlaying;
-    private final OnItemClickListener<NowPlayingModel> clickListener;
+public class AiringTodayAdapter extends RecyclerView.Adapter<AiringTodayAdapter.ViewHolder> {
+    private final List<AiringTodayModel> airingToday;
+    private final OnItemClickListener<AiringTodayModel> clickListener;
 
-    public NowPlayingAdapter(List<NowPlayingModel> nowPlaying, OnItemClickListener<NowPlayingModel> clickListener) {
-        this.nowPlaying = nowPlaying;
+    public AiringTodayAdapter(List<AiringTodayModel> airingToday, OnItemClickListener<AiringTodayModel> clickListener) {
+        this.airingToday = airingToday;
         this.clickListener = clickListener;
     }
 
@@ -32,20 +32,20 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.Vi
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.television_item, parent, false);
-        return new NowPlayingAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Glide.with(holder.itemView.getContext()).
-                load(Const.IMG_URL_200 + nowPlaying.get(position).getImgUrl())
-                .into(holder.ivPoster);
-        holder.tvTitle.setText(nowPlaying.get(position).getTitle());
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        Glide.with(viewHolder.itemView.getContext())
+                .load(Const.IMG_URL_200 + airingToday.get(position).getImgUrl())
+                .into(viewHolder.ivPoster);
+        viewHolder.tvTitle.setText(airingToday.get(position).getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return nowPlaying.size();
+        return airingToday.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -60,8 +60,8 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.Vi
         }
 
         @Override
-        public void onClick(View v) {
-            clickListener.onClick(nowPlaying.get(getBindingAdapterPosition()));
+        public void onClick(View view) {
+            clickListener.onClick(airingToday.get(getBindingAdapterPosition()));
         }
     }
 }
