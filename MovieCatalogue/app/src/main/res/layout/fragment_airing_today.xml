@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg1"
     tools:context=".fragments.AiringTodayFragment">
+    <include layout="@layout/progress_overlay"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_airing_today"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+
         android:layout_gravity="center_horizontal"
         tools:listitem="@layout/television_item" />
-
 </FrameLayout>

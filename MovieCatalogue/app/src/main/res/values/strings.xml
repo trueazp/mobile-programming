@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">MovieCatalogue</string>
     <string name="title_activity_detail">DetailActivity</string>
+
+    <string name="lorem">
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Egestas purus viverra accumsan in nisl nisi scelerisque eu ultrices. Lacus laoreet non curabitur gravida arcu ac tortor dignissim.
+        Molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed. Purus ut faucibus pulvinar elementum integer enim neque volutpat ac.
+        Placerat in egestas erat imperdiet sed euismod nisi. Lectus mauris ultrices eros in cursus turpis massa. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam erat.
+        Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit. Ornare aenean euismod elementum nisi quis eleifend quam. Odio euismod lacinia at quis risus sed vulputate odio ut.
+        At elementum eu facilisis sed odio morbi quis. Pulvinar proin gravida hendrerit lectus a. Et ligula ullamcorper malesuada proin.
+        Amet mauris commodo quis imperdiet massa tincidunt nunc pulvinar sapien. Cras fermentum odio eu feugiat pretium nibh ipsum consequat.
+        Metus dictum at tempor commodo ullamcorper a lacus vestibulum."
+    </string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -9,6 +21,5 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

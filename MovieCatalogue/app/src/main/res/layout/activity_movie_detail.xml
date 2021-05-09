@@ -5,13 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg1"
     tools:context=".activities.MovieDetailActivity">
-    <include
-        layout="@layout/progress_overlay"/>
+    <include layout="@layout/progress_overlay"/>
 
     <ScrollView
         android:layout_height="match_parent"
         android:layout_width="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -20,122 +21,161 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+
                 app:layout_constraintTop_toTopOf="parent">
                 <ImageView
                     android:id="@+id/iv_poster"
                     android:layout_height="300dp"
                     android:layout_width="200dp"
+
+                    android:src="@color/cardview_dark_background"
+
+                    tools:ignore="ContentDescription"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:src="@color/cardview_dark_background"
-                    tools:ignore="ContentDescription"
-                    android:layout_alignParentLeft="true" />
+                    android:layout_alignParentLeft="true"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@id/iv_poster"
                     android:orientation="vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/iv_poster">
+
                     <TextView
                         android:id="@+id/tv_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         android:text="movie_example"
-                        android:textSize="32sp"
+                        android:textSize="24sp"
+                        android:fontFamily="sans-serif-condensed"
                         android:textStyle="bold"/>
+
                     <TextView
                         android:id="@+id/tv_release_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="release_date_example"
-                        />
+
+                        android:text="release_date_example"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:textSize="16sp"
+
                         android:text="rating_title"
-                        android:textStyle="bold"
-                        />
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textStyle="bold"/>
+
                     <TextView
                         android:id="@+id/tv_rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="rating_example"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="runtime_title"
+
+                        android:text="rating_example"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        />
-                    <TextView
-                        android:id="@+id/tv_runtime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="runtime_example"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="budget_title"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        />
-                    <TextView
-                        android:id="@+id/tv_budget"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="money_example"
-                        />
+                        android:fontFamily="sans-serif-condensed"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
+
+                        android:text="runtime_title"
                         android:textSize="16sp"
-                        android:text="revenue_example"
+                        android:fontFamily="sans-serif-condensed"
                         android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tv_runtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="runtime_example"
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-condensed"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+
+                        android:text="budget_title"
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tv_budget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="money_example"
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-condensed"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+
+                        android:text="revenue_example"
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textStyle="bold"/>
+
                     <TextView
                         android:id="@+id/tv_revenue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         android:text="money_example"
-                        />
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-condensed"/>
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+
                     android:text="budget_title"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="sans-serif-condensed"
+                    android:textStyle="bold"/>
             </RelativeLayout>
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/top_layout"
-                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="8dp"
-                app:cardBackgroundColor="@color/teal_700">
+
+                app:cardBackgroundColor="@color/teal_700"
+
+                app:layout_constraintTop_toBottomOf="@id/top_layout"
+                app:layout_constraintLeft_toLeftOf="parent">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="10dp">
+
                     <TextView
                         android:id="@+id/tv_overview_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         android:text="overview_title"
                         android:textSize="24sp"
                         android:textColor="@color/white"
                         android:textStyle="bold"
+
                         app:layout_constraintTop_toBottomOf="@id/top_layout"
                         app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -143,11 +183,16 @@
                         android:id="@+id/tv_overview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+
                         android:textColor="@color/white"
+                        android:text="@string/lorem"
+                        android:textSize="15sp"
+                        android:fontFamily="sans-serif-condensed"
+
                         app:layout_constraintTop_toBottomOf="@id/tv_overview_title"
-                        android:justificationMode="inter_word"
-                        android:text="lorem"/>
+                        android:justificationMode="inter_word"/>
                 </LinearLayout>
+
             </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
