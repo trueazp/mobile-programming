@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             getSupportActionBar().setBackgroundDrawable(colorDrawable);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
         bottomNavigationItemView.setOnNavigationItemSelectedListener(this);
         bottomNavigationItemView.setSelectedItemId(R.id.menu_item_movie);
     }
