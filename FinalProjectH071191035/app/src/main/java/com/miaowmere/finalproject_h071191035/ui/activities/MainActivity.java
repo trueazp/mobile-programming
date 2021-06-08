@@ -1,6 +1,7 @@
 package com.miaowmere.finalproject_h071191035.ui.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -16,8 +17,9 @@ import com.miaowmere.finalproject_h071191035.ui.fragments.FavoriteFragment;
 import com.miaowmere.finalproject_h071191035.ui.fragments.MovieFragment;
 import com.miaowmere.finalproject_h071191035.ui.fragments.TvShowFragment;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+import java.util.Map;
 
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private BottomNavigationView bottomNavigationItemView;
 
     @Override
@@ -40,31 +42,46 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
+        String sortBy = null;
         switch (item.getItemId()){
             case R.id.menu_item_movie:
-                setActionBarTitle(getString(R.string.movie_label));
+                setActionBar(getString(R.string.movie_label), R.drawable.ic_movie);
+                sortBy = "movie";
                 fragment = new MovieFragment();
                 break;
             case R.id.menu_item_tv_show:
-                setActionBarTitle(getString(R.string.tv_show_label));
+                setActionBar(getString(R.string.tv_show_label), R.drawable.ic_tv_show);
+                sortBy = "tv_show";
                 fragment = new TvShowFragment();
                 break;
             case R.id.menu_item_favorite:
-                setActionBarTitle(getString(R.string.favorite_label));
+                setActionBar(getString(R.string.favorites_label), R.drawable.ic_star);
                 fragment = new FavoriteFragment();
                 break;
         }
         if(fragment != null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fl_main, fragment).commit();
+//            getSupportFragmentManager().beginTransaction().replace(R.id.fl_main, fragment).commit();
+            startFragment(fragment, sortBy);
             return true;
         }
         return true;
     }
 
-    private void setActionBarTitle(String title) {
-        title = title.replaceAll("\\s","");
-        String first = title.substring(0,title.length()/2);
-        String end = title.substring(title.length()/2,title.length());
-        getSupportActionBar().setTitle(Html.fromHtml(first+"<font color=\"#FFFFFFFF\">"+end+"</font>"));
+    private void startFragment(Fragment fragment, String sortBy) {
+        if (sortBy != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("SORT_BY", sortBy);
+            fragment.setArguments(bundle);
+        }
+    }
+
+    private void setActionBar(String title, int logo) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("\t" + title);
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setDisplayUseLogoEnabled(true);
+            actionBar.setLogo(logo);
+        }
     }
 }
