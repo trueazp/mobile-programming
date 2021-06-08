@@ -3,18 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/srl_tv_show"
+    android:id="@+id/srl_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".ui.fragments.TvShowFragment">
+    tools:context=".ui.fragments.MainFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/lpi_tv_show"
+            android:id="@+id/lpi_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:indeterminate="true"
@@ -28,17 +28,19 @@
             app:trackCornerRadius="4dp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_tv_show"
+            android:id="@+id/rv_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
+            android:paddingHorizontal="12dp"
             android:paddingVertical="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_tv_show_layout" />
+            tools:listitem="@layout/item_layout"/>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_tv_show_error"
+            android:id="@+id/cl_main_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -59,6 +61,7 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
+                android:id="@+id/tv_no_internet_connection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"

@@ -5,7 +5,7 @@ import com.miaowmere.finalproject_h071191035.data.models.TvShow;
 
 import java.util.List;
 
-public interface OnSearchCallback {
-    void onSuccess(List<TvShow> tvShowList, List<Movie> movieList, String message, int page);
+public interface OnSearchCallback<T> {
+    void onSuccess(List<T> list, String message, int page);
     void onFailure(String message);
 }

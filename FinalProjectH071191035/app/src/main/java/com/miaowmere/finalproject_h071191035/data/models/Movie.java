@@ -1,6 +1,7 @@
 package com.miaowmere.finalproject_h071191035.data.models;
 
 import com.google.gson.annotations.SerializedName;
+import com.miaowmere.finalproject_h071191035.Const;
 import com.miaowmere.finalproject_h071191035.ImageSize;
 
 import java.util.List;
@@ -11,11 +12,11 @@ public class Movie {
     @SerializedName("original_title")
     private String title;
     @SerializedName("backdrop_path")
-    private String backdropImage;
+    private String backdropPath;
     @SerializedName("release_date")
     private String releaseDate;
     @SerializedName("poster_path")
-    private String posterImage;
+    private String posterPath;
     @SerializedName("genres")
     private List<Genre> genres;
 
@@ -43,12 +44,12 @@ public class Movie {
         this.title = title;
     }
 
-    public String getBackdropImage() {
-        return backdropImage;
+    public String getBackdropPath(ImageSize size) {
+        return Const.IMG_URL + size.getValue() + backdropPath;
     }
 
     public void setBackdropImage(String backdropImage) {
-        this.backdropImage = backdropImage;
+        this.backdropPath = backdropImage;
     }
 
     public String getReleaseDate() {
@@ -59,12 +60,12 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    public String getPosterImage(ImageSize w154) {
-        return posterImage;
+    public String getPosterPath(ImageSize size) {
+        return Const.IMG_URL + size.getValue() + posterPath;
     }
 
     public void setPosterImage(String posterImage) {
-        this.posterImage = posterImage;
+        this.posterPath = posterImage;
     }
 
     public List<Genre> getGenres() {

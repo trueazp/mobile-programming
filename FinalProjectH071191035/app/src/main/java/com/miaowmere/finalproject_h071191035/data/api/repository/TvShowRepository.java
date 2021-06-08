@@ -1,19 +1,23 @@
 package com.miaowmere.finalproject_h071191035.data.api.repository;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 
 import com.miaowmere.finalproject_h071191035.Const;
+import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnCallback;
+import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnDetailCallback;
 import com.miaowmere.finalproject_h071191035.data.api.services.Service;
 import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnSearchCallback;
-import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnTvDetailCallback;
-import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnTvShowCallback;
 import com.miaowmere.finalproject_h071191035.data.models.TvShow;
 import com.miaowmere.finalproject_h071191035.data.models.TvShowResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TvShowRepository {
     private static TvShowRepository repository;
@@ -23,13 +27,22 @@ public class TvShowRepository {
         this.service = service;
     }
 
-    public void getTvShow(int page, final OnTvShowCallback callback) {
+    public static TvShowRepository getInstance() {
+        if (repository == null) {
+            Retrofit retrofit = new Retrofit.Builder().baseUrl(Const.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+            repository = new TvShowRepository(retrofit.create(Service.class));
+        }
+        return repository;
+    }
+
+    public void getTvShow(int page, final OnCallback<TvShow> callback) {
         service.getTvResults(Const.API_KEY, Const.getLang(), page).enqueue(new Callback<TvShowResponse>() {
             @Override
             public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         if (response.body().getResults() != null) {
+                            Log.d("TV Show Response", response.body().getResults().toString());
                             callback.onSuccess(response.body().getPage(), response.body().getResults());
                         } else {
                             callback.onFailure("response.body().getResults() is null");
@@ -49,7 +62,7 @@ public class TvShowRepository {
         });
     }
 
-    public void getTvDetail(int id, final OnTvDetailCallback callback) {
+    public void getTvDetail(int id, final OnDetailCallback<TvShow> callback) {
         service.getTvDetail(id, Const.API_KEY, Const.getLang()).enqueue(new Callback<TvShow>() {
             @Override
             public void onResponse(@NonNull Call<TvShow> call, @NonNull Response<TvShow> response) {
@@ -71,14 +84,14 @@ public class TvShowRepository {
         });
     }
 
-    public void search(String query, int page, final OnSearchCallback callback) {
+    public void search(String query, int page, final OnSearchCallback<TvShow> callback) {
         service.searchTv(Const.API_KEY, query, Const.getLang(), page).enqueue(new Callback<TvShowResponse>() {
             @Override
             public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         if (response.body().getResults() != null) {
-                            callback.onSuccess(response.body().getResults(), null, response.message(), response.body().getPage());
+                            callback.onSuccess(response.body().getResults(), response.message(), response.body().getPage());
                         } else {
                             callback.onFailure("No Result");
                         }

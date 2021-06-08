@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.miaowmere.finalproject_h071191035">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,9 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectH071191035">
-        <activity android:name=".ui.activities.MainActivity"></activity>
-        <activity android:name=".ui.activities.TvShowDetailActivity" />
-        <activity android:name=".ui.activities.MovieDetailActivity" />
+        <activity android:name=".ui.activities.DetailActivity"></activity>
+        <activity android:name=".ui.activities.MainActivity" />
         <activity android:name=".ui.activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

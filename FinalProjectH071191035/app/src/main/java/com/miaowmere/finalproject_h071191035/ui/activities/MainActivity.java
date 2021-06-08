@@ -8,16 +8,12 @@ import androidx.fragment.app.Fragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.miaowmere.finalproject_h071191035.R;
 import com.miaowmere.finalproject_h071191035.ui.fragments.FavoriteFragment;
-import com.miaowmere.finalproject_h071191035.ui.fragments.MovieFragment;
-import com.miaowmere.finalproject_h071191035.ui.fragments.TvShowFragment;
-
-import java.util.Map;
+import com.miaowmere.finalproject_h071191035.ui.fragments.MainFragment;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private BottomNavigationView bottomNavigationItemView;
@@ -28,15 +24,35 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
 
         bottomNavigationItemView = findViewById(R.id.bottom_nav);
-
-        if(getSupportActionBar()!=null){
-            ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#292929"));
-            getSupportActionBar().setBackgroundDrawable(colorDrawable);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-
         bottomNavigationItemView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationItemView.setSelectedItemId(R.id.menu_item_movie);
+        setSelectedItem(bottomNavigationItemView);
+
+//        if(getSupportActionBar()!=null){
+//            ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#292929"));
+//            getSupportActionBar().setBackgroundDrawable(colorDrawable);
+//            getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        }
+//
+//        bottomNavigationItemView.setOnNavigationItemSelectedListener(this);
+//        bottomNavigationItemView.setSelectedItemId(R.id.menu_item_movie);
+    }
+
+    private void setSelectedItem(BottomNavigationView bottomNavigationItemView) {
+        if (getIntent().getStringExtra("SELECTED_FRAGMENT") != null) {
+            switch (getIntent().getStringExtra("SELECTED_FRAGMENT")) {
+                case "movie":
+                    bottomNavigationItemView.setSelectedItemId(R.id.menu_item_movie);
+                    break;
+                case "tv_show":
+                    bottomNavigationItemView.setSelectedItemId(R.id.menu_item_tv_show);
+                    break;
+                case "favorite":
+                    bottomNavigationItemView.setSelectedItemId(R.id.menu_item_favorite);
+                    break;
+            }
+        } else {
+            bottomNavigationItemView.setSelectedItemId(R.id.menu_item_movie);
+        }
     }
 
     @Override
@@ -47,12 +63,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.menu_item_movie:
                 setActionBar(getString(R.string.movie_label), R.drawable.ic_movie);
                 sortBy = "movie";
-                fragment = new MovieFragment();
+                fragment = new MainFragment();
                 break;
             case R.id.menu_item_tv_show:
                 setActionBar(getString(R.string.tv_show_label), R.drawable.ic_tv_show);
                 sortBy = "tv_show";
-                fragment = new TvShowFragment();
+                fragment = new MainFragment();
                 break;
             case R.id.menu_item_favorite:
                 setActionBar(getString(R.string.favorites_label), R.drawable.ic_star);
