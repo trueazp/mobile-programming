@@ -5,8 +5,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -22,29 +20,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         bottomNavigationItemView = findViewById(R.id.bottom_nav);
         bottomNavigationItemView.setOnNavigationItemSelectedListener(this);
         setSelectedItem(bottomNavigationItemView);
-
-//        if(getSupportActionBar()!=null){
-//            ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#292929"));
-//            getSupportActionBar().setBackgroundDrawable(colorDrawable);
-//            getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        }
-//
-//        bottomNavigationItemView.setOnNavigationItemSelectedListener(this);
-//        bottomNavigationItemView.setSelectedItemId(R.id.menu_item_movie);
     }
 
     private void setSelectedItem(BottomNavigationView bottomNavigationItemView) {
         if (getIntent().getStringExtra("SELECTED_FRAGMENT") != null) {
             switch (getIntent().getStringExtra("SELECTED_FRAGMENT")) {
-                case "movie":
-                    bottomNavigationItemView.setSelectedItemId(R.id.menu_item_movie);
-                    break;
                 case "tv_show":
                     bottomNavigationItemView.setSelectedItemId(R.id.menu_item_tv_show);
+                    break;
+                case "movie":
+                    bottomNavigationItemView.setSelectedItemId(R.id.menu_item_movie);
                     break;
                 case "favorite":
                     bottomNavigationItemView.setSelectedItemId(R.id.menu_item_favorite);
@@ -60,14 +48,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Fragment fragment = null;
         String sortBy = null;
         switch (item.getItemId()){
-            case R.id.menu_item_movie:
-                setActionBar(getString(R.string.movie_label), R.drawable.ic_movie);
-                sortBy = "movie";
-                fragment = new MainFragment();
-                break;
             case R.id.menu_item_tv_show:
                 setActionBar(getString(R.string.tv_show_label), R.drawable.ic_tv_show);
                 sortBy = "tv_show";
+                fragment = new MainFragment();
+                break;
+            case R.id.menu_item_movie:
+                setActionBar(getString(R.string.movie_label), R.drawable.ic_movie);
+                sortBy = "movie";
                 fragment = new MainFragment();
                 break;
             case R.id.menu_item_favorite:
@@ -75,20 +63,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 fragment = new FavoriteFragment();
                 break;
         }
-        if(fragment != null){
-//            getSupportFragmentManager().beginTransaction().replace(R.id.fl_main, fragment).commit();
+        if (fragment != null){
+            // Method that handle which data to show base on @sortBy params
             startFragment(fragment, sortBy);
             return true;
         }
-        return true;
+        return false;
     }
 
-    private void startFragment(Fragment fragment, String sortBy) {
-        if (sortBy != null) {
-            Bundle bundle = new Bundle();
-            bundle.putString("SORT_BY", sortBy);
-            fragment.setArguments(bundle);
+    private void startFragment(Fragment fragment, String bundle) {
+        if (bundle != null) {
+            Bundle sortBy = new Bundle();
+            sortBy.putString("SORT_BY", bundle);
+            fragment.setArguments(sortBy);
         }
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_main, fragment).commit();
     }
 
     private void setActionBar(String title, int logo) {

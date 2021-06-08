@@ -17,6 +17,10 @@ public class Movie {
     private String releaseDate;
     @SerializedName("poster_path")
     private String posterPath;
+    @SerializedName("popularity")
+    private float popularity;
+    @SerializedName("vote_average")
+    private float voteAverage;
     @SerializedName("genres")
     private List<Genre> genres;
 
@@ -66,6 +70,14 @@ public class Movie {
 
     public void setPosterImage(String posterImage) {
         this.posterPath = posterImage;
+    }
+
+    public float getPopularity() {
+        return popularity;
+    }
+
+    public float getVoteAverage() {
+        return voteAverage;
     }
 
     public List<Genre> getGenres() {

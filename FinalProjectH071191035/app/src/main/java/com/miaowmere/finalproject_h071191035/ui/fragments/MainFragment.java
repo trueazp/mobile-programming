@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,7 +45,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
     private int movieCurrentPage = 1, tvShowCurrentPage = 1;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
@@ -61,6 +62,15 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
     private void setSearchView(SearchView searchView) {
         searchView.setQueryHint(getString(R.string.search_hint_label));
         searchView.setOnQueryTextListener(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.item_language_setting) {
+            startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
+            return true;
+        }
+        return super.onOptionsItemSelected(menuItem);
     }
 
     @Nullable
@@ -111,12 +121,12 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                 @Override
                 public void onSuccess(int page, List<Movie> movies) {
                     if (mainAdapter == null) {
-                        mainAdapter = new MainAdapter(movies, null);
+                        mainAdapter = new MainAdapter(null, movies);
                         mainAdapter.setClickListener(MainFragment.this);
                         mainAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(mainAdapter);
                     } else {
-                        mainAdapter.appendList(movies, null);
+                        mainAdapter.appendList(null, movies);
                     }
                     movieCurrentPage = page;
                     isFetching = false;
@@ -133,12 +143,12 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                 @Override
                 public void onSuccess(List<Movie> movies, String message, int page) {
                     if (mainAdapter == null) {
-                        mainAdapter = new MainAdapter(movies, null);
+                        mainAdapter = new MainAdapter(null, movies);
                         mainAdapter.setClickListener(MainFragment.this);
                         mainAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(mainAdapter);
                     } else {
-                        mainAdapter.appendList(movies, null);
+                        mainAdapter.appendList(null, movies);
                     }
                     movieCurrentPage = page;
                     isFetching = false;
@@ -160,12 +170,12 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                 @Override
                 public void onSuccess(int page, List<TvShow> tvShows) {
                     if (mainAdapter == null) {
-                        mainAdapter = new MainAdapter(null, tvShows);
+                        mainAdapter = new MainAdapter(tvShows, null);
                         mainAdapter.setClickListener(MainFragment.this);
                         mainAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(mainAdapter);
                     } else {
-                        mainAdapter.appendList(null, tvShows);
+                        mainAdapter.appendList(tvShows, null);
                     }
                     tvShowCurrentPage = page;
                     isFetching = false;
@@ -182,12 +192,12 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                 @Override
                 public void onSuccess(List<TvShow> tvShows, String message, int page) {
                     if (mainAdapter == null) {
-                        mainAdapter = new MainAdapter(null, tvShows);
+                        mainAdapter = new MainAdapter(tvShows, null);
                         mainAdapter.setClickListener(MainFragment.this);
                         mainAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(mainAdapter);
                     } else {
-                        mainAdapter.appendList(null, tvShows);
+                        mainAdapter.appendList(tvShows, null);
                     }
                     tvShowCurrentPage = page;
                     isFetching = false;
@@ -206,7 +216,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
         if (getArguments() != null) {
             return getArguments().getString("SORT_BY");
         }
-        return "movie";
+        return "tv_show";
     }
 
     @Override
@@ -218,17 +228,17 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
     public boolean onQueryTextChange(String newText) {
         if (newText.length() > 0) {
             mainAdapter = null;
-            if (getBundle().equals("movie")) {
-                getMovieRepositoryData(newText, movieCurrentPage);
-            } else {
+            if (getBundle().equals("tv_show")) {
                 getTvShowRepositoryData(newText, tvShowCurrentPage);
+            } else {
+                getMovieRepositoryData(newText, movieCurrentPage);
             }
         } else {
             mainAdapter = null;
-            if (getBundle().equals("movie")) {
-                getMovieRepositoryData("", movieCurrentPage);
-            } else {
+            if (getBundle().equals("tv_show")) {
                 getTvShowRepositoryData("", tvShowCurrentPage);
+            } else {
+                getMovieRepositoryData("", movieCurrentPage);
             }
         }
         return true;
@@ -237,10 +247,10 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
     @Override
     public void onRefresh() {
         mainAdapter = null;
-        if (getBundle().equals("movie")) {
-            getMovieRepositoryData("", movieCurrentPage);
-        } else {
+        if (getBundle().equals("tv_show")) {
             getTvShowRepositoryData("", tvShowCurrentPage);
+        } else {
+            getMovieRepositoryData("", movieCurrentPage);
         }
     }
 

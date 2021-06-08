@@ -20,14 +20,13 @@ import com.miaowmere.finalproject_h071191035.ui.adapters.clicklistener.OnItemCli
 import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
-
-    private List<Movie> movies;
-    private List<TvShow> tvShows;
+    private List<Movie> movieList;
+    private List<TvShow> tvShowList;
     private OnItemClickListener clickListener;
 
-    public MainAdapter(List<Movie> movies, List<TvShow> tvShows) {
-        this.movies = movies;
-        this.tvShows = tvShows;
+    public MainAdapter(List<TvShow> tvShowList, List<Movie> movieList) {
+        this.tvShowList = tvShowList;
+        this.movieList = movieList;
     }
 
     public void setClickListener(OnItemClickListener clickListener) {
@@ -43,23 +42,23 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (movies != null) {
-            holder.onBindItemView(movies.get(position));
+        if (tvShowList != null) {
+            holder.onBindItemView(tvShowList.get(position));
         } else {
-            holder.onBindItemView(tvShows.get(position));
+            holder.onBindItemView(movieList.get(position));
         }
     }
 
     @Override
     public int getItemCount() {
-        return movies != null ? movies.size() : tvShows.size();
+        return tvShowList != null ? tvShowList.size() : movieList.size();
     }
 
-    public void appendList(List<Movie> movieList, List<TvShow> tvShowList) {
-        if (movies != null) {
-            movies.addAll(movieList);
+    public void appendList(List<TvShow> tvShowListToAppend, List<Movie> movieListToAppend) {
+        if (tvShowListToAppend != null) {
+            tvShowList.addAll(tvShowListToAppend);
         } else {
-            tvShows.addAll(tvShowList);
+            movieList.addAll(movieListToAppend);
         }
         notifyDataSetChanged();
     }
