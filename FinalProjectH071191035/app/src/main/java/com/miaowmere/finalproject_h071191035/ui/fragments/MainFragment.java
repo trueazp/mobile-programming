@@ -108,6 +108,14 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                 if (firstVisibleItem + visibleItem >= totalItem / 2) {
                     if (!isFetching) {
                         // TODO: call repository with incremented page
+                        if (getBundle().equals("tv_show")) {
+                            tvShowCurrentPage++;
+                            getTvShowRepositoryData("", tvShowCurrentPage);
+                        } else {
+                            movieCurrentPage++;
+                            getMovieRepositoryData("", movieCurrentPage);
+                        }
+                        isFetching = false;
                     }
                 }
             }
@@ -247,6 +255,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
     @Override
     public void onRefresh() {
         mainAdapter = null;
+        tvShowCurrentPage = 1;
         if (getBundle().equals("tv_show")) {
             getTvShowRepositoryData("", tvShowCurrentPage);
         } else {

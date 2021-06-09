@@ -23,6 +23,8 @@ import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnDeta
 import com.miaowmere.finalproject_h071191035.data.models.Movie;
 import com.miaowmere.finalproject_h071191035.data.models.TvShow;
 
+import io.realm.Realm;
+
 public class DetailActivity extends AppCompatActivity {
     private ImageView ivBackdrop, ivPoster;
     private TextView tvName, tvFirstAirDate, tvLastAirDate, tvSeason, tvEpisode, tvOverview, tvError,
@@ -35,6 +37,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        Realm.init(this);
 
         ivBackdrop = findViewById(R.id.iv_banner_detail);
         ivPoster = findViewById(R.id.iv_poster_detail);
@@ -107,12 +110,8 @@ public class DetailActivity extends AppCompatActivity {
                     String backdropUri = media.getBackdropPath(ImageSize.W200);
                     float rating = (float) (media.getVoteAverage() / 2.0);
                     Log.d("RATING", Float.toString(rating));
-                    Glide.with(DetailActivity.this)
-                            .load(imageUri)
-                            .into(ivPoster);
-                    Glide.with(DetailActivity.this)
-                            .load(backdropUri)
-                            .into(ivBackdrop);
+                    Glide.with(DetailActivity.this).load(imageUri).into(ivPoster);
+                    Glide.with(DetailActivity.this).load(backdropUri).into(ivBackdrop);
                     tvName.setText(media.getName());
                     tvFirstAirDate.setText(media.getFirstAirDate());
                     tvLastAirDate.setText(media.getLastAirDate());
@@ -137,12 +136,8 @@ public class DetailActivity extends AppCompatActivity {
                     String backdropUri = media.getBackdropPath(ImageSize.W200);
                     float rating = (float) (media.getVoteAverage() / 2.0);
                     Log.d("RATING", Float.toString(rating));
-                    Glide.with(DetailActivity.this)
-                            .load(imageUri)
-                            .into(ivPoster);
-                    Glide.with(DetailActivity.this)
-                            .load(backdropUri)
-                            .into(ivBackdrop);
+                    Glide.with(DetailActivity.this).load(imageUri).into(ivPoster);
+                    Glide.with(DetailActivity.this).load(backdropUri).into(ivBackdrop);
                     tvName.setText(media.getTitle());
                     tvOverview.setText(media.getOverview());
                     rbRating.setRating(rating);
