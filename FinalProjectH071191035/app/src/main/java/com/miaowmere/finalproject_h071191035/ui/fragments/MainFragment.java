@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -178,6 +179,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                 @Override
                 public void onSuccess(int page, List<TvShow> tvShows) {
                     if (mainAdapter == null) {
+                        Log.d("Debugging", "adapter:null");
                         mainAdapter = new MainAdapter(tvShows, null);
                         mainAdapter.setClickListener(MainFragment.this);
                         mainAdapter.notifyDataSetChanged();
@@ -192,7 +194,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
 
                 @Override
                 public void onFailure(String message) {
-                    // TODO error message
+                    Log.d("Error Fetching", message);
                 }
             });
         } else {
@@ -256,6 +258,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
     public void onRefresh() {
         mainAdapter = null;
         tvShowCurrentPage = 1;
+        movieCurrentPage = 1;
         if (getBundle().equals("tv_show")) {
             getTvShowRepositoryData("", tvShowCurrentPage);
         } else {
