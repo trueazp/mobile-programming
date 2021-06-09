@@ -9,6 +9,7 @@ import java.util.List;
 public class Movie {
     private int id;
     private String overview;
+    private String runtime;
     @SerializedName("original_title")
     private String title;
     @SerializedName("backdrop_path")
@@ -21,6 +22,8 @@ public class Movie {
     private float popularity;
     @SerializedName("vote_average")
     private float voteAverage;
+    @SerializedName("vote_count")
+    private String voteCount;
     @SerializedName("genres")
     private List<Genre> genres;
 
@@ -38,6 +41,22 @@ public class Movie {
 
     public void setOverview(String overview) {
         this.overview = overview;
+    }
+
+    public String getRuntime() {
+        return runtime != null ? String.format("%s Min", runtime) : "None";
+    }
+
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
+    }
+
+    public String getVoteCount() {
+        return String.format("%s Votes", voteCount);
+    }
+
+    public void setVoteCount(String voteCount) {
+        this.voteCount = voteCount;
     }
 
     public String getTitle() {

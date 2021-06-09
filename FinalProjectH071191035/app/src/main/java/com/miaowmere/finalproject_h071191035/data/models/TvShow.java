@@ -30,7 +30,9 @@ public class TvShow {
     @SerializedName("vote_average")
     private float voteAverage;
     @SerializedName("vote_count")
-    private int voteCount;
+    private String voteCount;
+    @SerializedName("episode_run_time")
+    private String[] runtime;
     @SerializedName("genres")
     private List<Genre> genres;
 
@@ -78,8 +80,12 @@ public class TvShow {
         return voteAverage;
     }
 
-    public int getVoteCount() {
-        return voteCount;
+    public String getVoteCount() {
+        return String.format("%s Votes", voteCount);
+    }
+
+    public String getRuntime() {
+        return runtime.length > 0 ? String.format("%s Min Per Ep.", runtime[0]) : "None";
     }
 
     public List<Genre> getGenres() {

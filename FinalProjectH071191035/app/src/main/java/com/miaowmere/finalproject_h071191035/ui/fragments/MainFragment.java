@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.miaowmere.finalproject_h071191035.R;
 import com.miaowmere.finalproject_h071191035.data.api.repository.MovieRepository;
 import com.miaowmere.finalproject_h071191035.data.api.repository.TvShowRepository;
@@ -36,6 +37,7 @@ import java.util.List;
 
 public class MainFragment extends Fragment implements OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
+    private LinearProgressIndicator linearProgressIndicator;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private MainAdapter mainAdapter;
@@ -79,6 +81,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+        linearProgressIndicator = view.findViewById(R.id.lpi_main);
         swipeRefreshLayout = view.findViewById(R.id.srl_main);
         recyclerView = view.findViewById(R.id.rv_main);
         tvError = view.findViewById(R.id.tv_no_internet_connection);
@@ -134,11 +137,13 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                         mainAdapter.setClickListener(MainFragment.this);
                         mainAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(mainAdapter);
+                        linearProgressIndicator.hide();
                     } else {
                         mainAdapter.appendList(null, movies);
                     }
                     movieCurrentPage = page;
                     isFetching = false;
+                    linearProgressIndicator.hide();
                     swipeRefreshLayout.setRefreshing(false);
                 }
 
@@ -161,6 +166,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                     }
                     movieCurrentPage = page;
                     isFetching = false;
+                    linearProgressIndicator.hide();
                     swipeRefreshLayout.setRefreshing(false);
                 }
 
@@ -189,6 +195,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                     }
                     tvShowCurrentPage = page;
                     isFetching = false;
+                    linearProgressIndicator.hide();
                     swipeRefreshLayout.setRefreshing(false);
                 }
 
@@ -211,6 +218,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                     }
                     tvShowCurrentPage = page;
                     isFetching = false;
+                    linearProgressIndicator.hide();
                     swipeRefreshLayout.setRefreshing(false);
                 }
 
