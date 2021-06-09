@@ -9,7 +9,7 @@
     <string name="detail_label">Detail</string>
     <string name="title_label">Movie or TV Show Title</string>
     <string name="duration">66 Min</string>
-    <!--    <string name="divider">‏‏‏‏‎ ‎ ‎‎‎•‏‏‎ ‏‏‎ ‎</string>-->
+        <string name="divider">‎ •</string>
     <string name="vote_count">6666 Votes</string>
     <string name="watch_label">Watch Now</string>
     <string name="favorite_label">Favorite</string>
@@ -20,8 +20,11 @@
     <string name="genres_label">Comedy, Thriller, Fantasy, Sci-Fi</string>
     <string name="lorem_label">Lorem ipsum dolor sit amet, consect adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes. Cum sociis natoque penatibus et magnis dis parturient montes. Cum sociis natoque penatibus et magnis dis parturient montes.</string>
     <string name="no_internet_connection">No Internet Connection</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="language">Language</string>
     <string name="search_hint_label">Type Movie or TV Show Title</string>
+    <string name="first_air_date_label">First Air Date</string>
+    <string name="last_air_date_label">Last Air Date</string>
+    <string name="episode_label">Episode</string>
+    <string name="num_label">66</string>
+    <string name="season_label">Season</string>
 </resources>

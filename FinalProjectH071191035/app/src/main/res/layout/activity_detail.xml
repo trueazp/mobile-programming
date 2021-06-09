@@ -141,8 +141,8 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cv_poster_detail"
-                        android:layout_width="110dp"
-                        android:layout_height="160dp"
+                        android:layout_width="130dp"
+                        android:layout_height="180dp"
                         android:layout_marginVertical="8dp"
                         android:layout_marginStart="24dp"
                         app:cardCornerRadius="8dp"
@@ -163,40 +163,40 @@
 
                     <TextView
                         android:id="@+id/tv_full_title_detail"
-                        style="@style/TextFrame.Title"
                         android:layout_width="0dp"
                         android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
                         android:layout_marginEnd="24dp"
                         android:ellipsize="end"
                         android:maxLines="2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/cv_poster_detail"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="@string/title_label" />
+                        tools:text="@string/title_label"
+                        style="@style/TextFrame.Title"/>
 
-                    <TextView
-                        android:id="@+id/tv_release_detail"
-                        style="@style/TextFrame.Aired"
-                        android:layout_width="0dp"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="24dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/cv_poster_detail"
-                        app:layout_constraintTop_toBottomOf="@id/tv_full_title_detail"
-                        tools:text="@string/release_date_label" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tv_release_detail"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_marginStart="12dp"-->
+<!--                        android:layout_marginEnd="24dp"-->
+<!--                        android:textSize="16sp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toEndOf="@id/cv_poster_detail"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/tv_full_title_detail"-->
+<!--                        tools:text="@string/release_date_label"-->
+<!--                        style="@style/TextFrame.Aired"/>-->
 
                     <LinearLayout
                         android:id="@+id/ll_rating_bar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="0dp"
                         android:layout_marginEnd="24dp"
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/cv_poster_detail"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_release_detail">
+                        app:layout_constraintTop_toBottomOf="@+id/tv_full_title_detail">
 
                         <RatingBar
                             android:id="@+id/rb_vote_average_detail"
@@ -214,7 +214,7 @@
                             android:stepSize="0.01"
                             android:transformPivotX="0dp"
                             android:transformPivotY="0dp"
-                            tools:rating="3" />
+                            tools:rating="3"/>
 
                         <TextView
                             android:id="@+id/tv_vote_average_detail"
@@ -228,38 +228,159 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/tv_runtime_detail"
-                        style="@style/TextFrame.Aired"
-                        android:layout_width="0dp"
+                        android:id="@+id/tv_first_air_date_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/first_air_date_label"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
                         android:layout_marginStart="12dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="0dp"
                         android:layout_marginEnd="24dp"
-                        android:drawablePadding="5dp"
-                        android:textColor="@color/colorSecondaryText"
-                        android:textSize="16sp"
-                        app:drawableStartCompat="@drawable/ic_duration"
-                        app:drawableTint="@color/colorSecondaryText"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/cv_poster_detail"
-                        app:layout_constraintTop_toBottomOf="@id/ll_rating_bar"
-                        tools:text="@string/duration" />
+                        app:layout_constraintStart_toEndOf="@+id/cv_poster_detail"
+                        app:layout_constraintTop_toBottomOf="@+id/ll_rating_bar"
+                        style="@style/TextFrame.Aired"/>
 
                     <TextView
-                        android:id="@+id/tv_vote_count_detail"
-                        style="@style/TextFrame.Aired"
-                        android:layout_width="0dp"
+                        android:id="@+id/tv_first_air_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="24dp"
+                        android:text="@string/release_date_label"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/cv_poster_detail"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_first_air_date_label"
+                        style="@style/TextFrame.Aired"/>
+
+                    <TextView
+                        android:id="@+id/tv_last_air_date_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/last_air_date_label"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="24dp"
+                        app:layout_constraintStart_toEndOf="@+id/tv_first_air_date_label"
+                        app:layout_constraintTop_toBottomOf="@+id/ll_rating_bar"
+                        style="@style/TextFrame.Aired"/>
+
+                    <TextView
+                        android:id="@+id/tv_last_air_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="24dp"
+                        android:text="@string/release_date_label"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/tv_first_air_date_label"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_last_air_date_label"
+                        style="@style/TextFrame.Aired"/>
+
+                    <TextView
+                        android:id="@+id/tv_episode_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="24dp"
+                        android:text="@string/episode_label"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toEndOf="@id/cv_poster_detail"
+                        app:layout_constraintTop_toBottomOf="@id/tv_first_air_date"
+                        style="@style/TextFrame.Aired"/>
+
+                    <TextView
+                        android:id="@+id/tv_episode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="24dp"
+                        android:text="@string/num_label"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toEndOf="@id/cv_poster_detail"
+                        app:layout_constraintTop_toBottomOf="@id/tv_episode_label"
+                        style="@style/TextFrame.Aired"/>
+
+                    <TextView
+                        android:id="@+id/tv_season_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="52dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="24dp"
+                        android:text="@string/season_label"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_episode_label"
+                        app:layout_constraintTop_toBottomOf="@id/tv_first_air_date"
+                        style="@style/TextFrame.Aired"/>
+
+                    <TextView
+                        android:id="@+id/tv_season"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="52dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="24dp"
+                        android:text="@string/num_label"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_episode_label"
+                        app:layout_constraintTop_toBottomOf="@id/tv_season_label"
+                        style="@style/TextFrame.Aired"/>
+
+                    <TextView
+                        android:id="@+id/tv_runtime"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
                         android:layout_marginEnd="24dp"
                         android:drawablePadding="5dp"
                         android:textColor="@color/colorSecondaryText"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@id/cv_poster_detail"
+                        app:layout_constraintTop_toBottomOf="@id/tv_episode"
+                        app:drawableStartCompat="@drawable/ic_duration"
+                        app:drawableTint="@color/colorSecondaryText"
+                        tools:text="@string/duration"
+                        style="@style/TextFrame.Aired"/>
+
+                    <TextView
+                        android:id="@+id/tv_dot"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="24dp"
+                        android:drawablePadding="5dp"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_runtime"
+                        app:layout_constraintTop_toBottomOf="@id/tv_episode"
+                        app:drawableTint="@color/colorSecondaryText"
+                        tools:text="@string/divider"
+                        style="@style/TextFrame.Aired"/>
+
+                    <TextView
+                        android:id="@+id/tv_vote_count"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="24dp"
+                        android:drawablePadding="5dp"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_dot"
+                        app:layout_constraintTop_toBottomOf="@id/tv_episode"
                         app:drawableStartCompat="@drawable/ic_twotone_thumb_up"
                         app:drawableTint="@color/colorSecondaryText"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/cv_poster_detail"
-                        app:layout_constraintTop_toBottomOf="@id/tv_runtime_detail"
-                        tools:text="@string/vote_count" />
+                        tools:text="@string/vote_count"
+                        style="@style/TextFrame.Aired"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -285,28 +406,9 @@
                     app:icon="@drawable/ic_play_circle"
                     app:iconGravity="textStart"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_favorite"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_favorite"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:text="@string/favorite_label"
-                    android:textColor="@color/colorSecondary"
-                    app:icon="@drawable/ic_favorite_border"
-                    app:iconGravity="textStart"
-                    app:iconTint="@color/colorSecondary"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/btn_watch"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:rippleColor="@color/colorSecondaryDarkVariant"
-                    app:strokeColor="@color/colorSecondary" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
