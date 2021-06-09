@@ -45,7 +45,7 @@ import io.realm.Realm;
 public class DetailActivity extends AppCompatActivity {
     private ImageView ivBackdrop, ivPoster;
     private TextView tvName, tvFirstAirDate, tvLastAirDate, tvSeason, tvEpisode, tvError,
-            tvLabelFirstAirDate, tvLabelLastAirDate, tvLabelEpisode, tvLabelSeason, tvRating, tvRuntime, tvVoteCount, tvGenresDetail;
+            tvLabelFirstAirDate, tvLabelLastAirDate, tvLabelEpisode, tvLabelSeason, tvRating, tvRuntime, tvVoteCount;
     private RatingBar rbRating;
     private ExpandableTextView etvOverview;
     private ArrayList<String> genres;
@@ -161,7 +161,7 @@ public class DetailActivity extends AppCompatActivity {
                     rvGenre.setLayoutManager(new LinearLayoutManager(DetailActivity.this, RecyclerView.HORIZONTAL, false));
                     rvGenre.setAdapter(new GenreAdapter(genres, DetailActivity.this));
                     loadCast(id, selectedFragment);
-                    tvRating.setText(Float.toString(media.getPopularity()));
+                    tvRating.setText(Float.toString(media.getVoteAverage()));
                     tvRuntime.setText(media.getRuntime());
                     tvVoteCount.setText(media.getVoteCount());
                     setActionBar(media.getName());
@@ -185,18 +185,20 @@ public class DetailActivity extends AppCompatActivity {
                     Glide.with(DetailActivity.this).load(imageUri).into(ivPoster);
                     Glide.with(DetailActivity.this).load(backdropUri).into(ivBackdrop);
                     tvName.setText(media.getTitle());
+                    tvFirstAirDate.setText((media.getReleaseDate()));
+                    tvLastAirDate.setText(media.getReleaseDate());
                     etvOverview.setText(media.getOverview());
                     tvLabelEpisode.setVisibility(View.GONE);
+                    tvEpisode.setVisibility(View.GONE);
                     tvLabelSeason.setVisibility(View.GONE);
-                    tvLabelFirstAirDate.setVisibility(View.GONE);
-                    tvLabelLastAirDate.setVisibility(View.GONE);
+                    tvSeason.setVisibility(View.GONE);
                     rbRating.setRating(rating);
                     setGenres(media.getGenres());
                     Log.d("Genre", media.getGenres().get(0).getName());
                     rvGenre.setLayoutManager(new LinearLayoutManager(DetailActivity.this, RecyclerView.HORIZONTAL, false));
                     rvGenre.setAdapter(new GenreAdapter(genres, DetailActivity.this));
                     loadCast(id, selectedFragment);
-                    tvRating.setText(Float.toString(media.getPopularity()));
+                    tvRating.setText(Float.toString(media.getVoteAverage()));
                     tvRuntime.setText(media.getRuntime());
                     tvVoteCount.setText(media.getVoteCount());
                     setActionBar(media.getTitle());
