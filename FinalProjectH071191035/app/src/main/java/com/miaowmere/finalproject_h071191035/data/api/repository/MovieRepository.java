@@ -4,23 +4,22 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.miaowmere.finalproject_h071191035.Const;
+import com.miaowmere.finalproject_h071191035.utilities.Const;
 import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnCallback;
 import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnDetailCallback;
 import com.miaowmere.finalproject_h071191035.data.api.services.Service;
 import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnSearchCallback;
 import com.miaowmere.finalproject_h071191035.data.models.Movie;
 import com.miaowmere.finalproject_h071191035.data.models.MovieResponse;
+import com.miaowmere.finalproject_h071191035.utilities.Repository;
+import com.miaowmere.finalproject_h071191035.utilities.SingletonRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MovieRepository {
+public class MovieRepository extends Repository<Movie> {
     private static MovieRepository repository;
-    private Service service;
 
     private MovieRepository(Service service) {
         this.service = service;
@@ -28,13 +27,13 @@ public class MovieRepository {
 
     public static MovieRepository getInstance() {
         if (repository == null) {
-            Retrofit retrofit = new Retrofit.Builder().baseUrl(Const.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-            repository = new MovieRepository(retrofit.create(Service.class));
+            Service service = SingletonRequest.getInstance();
+            repository = new MovieRepository(service);
         }
         return repository;
     }
 
-    public void getMovie(int page, final OnCallback callback) {
+    public void getModel(int page, final OnCallback<Movie> callback) {
         service.getMovieResults(Const.API_KEY, Const.getLang(), page).enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
@@ -61,7 +60,7 @@ public class MovieRepository {
         });
     }
 
-    public void getMovieDetail(int id, final OnDetailCallback<Movie> callback) {
+    public void getModelDetail(int id, final OnDetailCallback<Movie> callback) {
         service.getMovieDetail(id, Const.API_KEY, Const.getLang()).enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(@NonNull Call<Movie> call, @NonNull Response<Movie> response) {

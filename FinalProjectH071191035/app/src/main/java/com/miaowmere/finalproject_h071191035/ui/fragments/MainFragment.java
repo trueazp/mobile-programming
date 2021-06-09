@@ -35,6 +35,8 @@ import com.miaowmere.finalproject_h071191035.ui.adapters.clicklistener.OnItemCli
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 public class MainFragment extends Fragment implements OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
     private LinearProgressIndicator linearProgressIndicator;
@@ -54,7 +56,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@Nonnull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.toolbar_main, menu);
         MenuItem menuItem = menu.findItem(R.id.item_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
@@ -111,7 +113,9 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                 int firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition();
                 if (firstVisibleItem + visibleItem >= totalItem / 2) {
                     if (!isFetching) {
-                        // TODO: call repository with incremented page
+                        isFetching = true;
+                        Log.d("TV SHOW PAGE", Integer.toString(tvShowCurrentPage));
+                        Log.d("MOVIE PAGE", Integer.toString(movieCurrentPage));
                         if (getBundle().equals("tv_show")) {
                             tvShowCurrentPage++;
                             getTvShowRepositoryData("", tvShowCurrentPage);
@@ -129,7 +133,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
     private void getMovieRepositoryData(String query, int page) {
         isFetching = true;
         if (query.equals("")) {
-            movieRepository.getMovie(page, new OnCallback<Movie>() {
+            movieRepository.getModel(page, new OnCallback<Movie>() {
                 @Override
                 public void onSuccess(int page, List<Movie> movies) {
                     if (mainAdapter == null) {
@@ -149,7 +153,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
 
                 @Override
                 public void onFailure(String message) {
-                    // TODO error message
+                    Log.d("Error Fetching", message);
                 }
             });
         } else {
@@ -181,7 +185,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
     private void getTvShowRepositoryData(String query, int page) {
         isFetching = true;
         if (query.equals("")) {
-            tvShowRepository.getTvShow(page, new OnCallback<TvShow>() {
+            tvShowRepository.getModel(page, new OnCallback<TvShow>() {
                 @Override
                 public void onSuccess(int page, List<TvShow> tvShows) {
                     if (mainAdapter == null) {
@@ -224,7 +228,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
 
                 @Override
                 public void onFailure(String message) {
-                    // TODO error message
+                    Log.d("Error Fetching", message);
                 }
             });
         }

@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
-import com.miaowmere.finalproject_h071191035.ImageSize;
+import com.miaowmere.finalproject_h071191035.utilities.ImageSize;
 import com.miaowmere.finalproject_h071191035.R;
 import com.miaowmere.finalproject_h071191035.data.api.repository.MovieRepository;
 import com.miaowmere.finalproject_h071191035.data.api.repository.TvShowRepository;
@@ -124,7 +124,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private void load(Integer id, String selectedFragment) {
         if (selectedFragment.equals("tv_show")) {
-            tvShowRepository.getTvDetail(id, new OnDetailCallback<TvShow>() {
+            tvShowRepository.getModelDetail(id, new OnDetailCallback<TvShow>() {
                 @Override
                 public void onSuccess(TvShow media, String message) {
                     String imageUri = media.getPosterPath(ImageSize.W154);
@@ -153,7 +153,7 @@ public class DetailActivity extends AppCompatActivity {
                 }
             });
         } else {
-            movieRepository.getMovieDetail(id, new OnDetailCallback<Movie>() {
+            movieRepository.getModelDetail(id, new OnDetailCallback<Movie>() {
                 @Override
                 public void onSuccess(Movie media, String message) {
                     Log.d("MOVIE TITLE", media.getTitle());

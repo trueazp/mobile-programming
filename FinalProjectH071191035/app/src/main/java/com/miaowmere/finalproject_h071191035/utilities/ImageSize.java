@@ -1,4 +1,4 @@
-package com.miaowmere.finalproject_h071191035;
+package com.miaowmere.finalproject_h071191035.utilities;
 
 public enum ImageSize {
     W92("w92"),

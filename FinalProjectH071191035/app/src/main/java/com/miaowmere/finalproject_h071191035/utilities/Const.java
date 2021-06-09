@@ -1,4 +1,4 @@
-package com.miaowmere.finalproject_h071191035;
+package com.miaowmere.finalproject_h071191035.utilities;
 
 import java.util.Locale;
 
@@ -8,8 +8,6 @@ public class Const {
     public static final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie/";
     public static final String TV_SHOW_BASE_URL = "http://api.themoviedb.org/3/tv/";
     public static final String IMG_URL = "https://image.tmdb.org/t/p/";
-    public static final String IMG_URL_500 = "https://image.tmdb.org/t/p/w500/";
-    public static final String IMG_URL_300 = "https://image.tmdb.org/t/p/w300/";
 
     public static String getLang() {
         switch (Locale.getDefault().toString()) {

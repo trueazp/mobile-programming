@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.miaowmere.finalproject_h071191035.ImageSize;
+import com.miaowmere.finalproject_h071191035.utilities.ImageSize;
 import com.miaowmere.finalproject_h071191035.R;
 
 import com.miaowmere.finalproject_h071191035.data.models.Movie;

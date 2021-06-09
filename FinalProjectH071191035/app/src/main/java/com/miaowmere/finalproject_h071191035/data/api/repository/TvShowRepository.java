@@ -5,23 +5,22 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 
-import com.miaowmere.finalproject_h071191035.Const;
+import com.miaowmere.finalproject_h071191035.utilities.Const;
 import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnCallback;
 import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnDetailCallback;
 import com.miaowmere.finalproject_h071191035.data.api.services.Service;
 import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnSearchCallback;
 import com.miaowmere.finalproject_h071191035.data.models.TvShow;
 import com.miaowmere.finalproject_h071191035.data.models.TvShowResponse;
+import com.miaowmere.finalproject_h071191035.utilities.Repository;
+import com.miaowmere.finalproject_h071191035.utilities.SingletonRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class TvShowRepository {
+public class TvShowRepository extends Repository<TvShow> {
     private static TvShowRepository repository;
-    private Service service;
 
     private TvShowRepository(Service service) {
         this.service = service;
@@ -29,13 +28,13 @@ public class TvShowRepository {
 
     public static TvShowRepository getInstance() {
         if (repository == null) {
-            Retrofit retrofit = new Retrofit.Builder().baseUrl(Const.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-            repository = new TvShowRepository(retrofit.create(Service.class));
+            Service service = SingletonRequest.getInstance();
+            repository = new TvShowRepository(service);
         }
         return repository;
     }
 
-    public void getTvShow(int page, final OnCallback<TvShow> callback) {
+    public void getModel(int page, final OnCallback<TvShow> callback) {
         service.getTvResults(Const.API_KEY, Const.getLang(), page).enqueue(new Callback<TvShowResponse>() {
             @Override
             public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
@@ -62,7 +61,7 @@ public class TvShowRepository {
         });
     }
 
-    public void getTvDetail(int id, final OnDetailCallback<TvShow> callback) {
+    public void getModelDetail(int id, final OnDetailCallback<TvShow> callback) {
         service.getTvDetail(id, Const.API_KEY, Const.getLang()).enqueue(new Callback<TvShow>() {
             @Override
             public void onResponse(@NonNull Call<TvShow> call, @NonNull Response<TvShow> response) {

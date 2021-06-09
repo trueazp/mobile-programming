@@ -1,6 +1,6 @@
 package com.miaowmere.finalproject_h071191035.data.api.services;
 
-import com.miaowmere.finalproject_h071191035.Const;
+import com.miaowmere.finalproject_h071191035.utilities.Const;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

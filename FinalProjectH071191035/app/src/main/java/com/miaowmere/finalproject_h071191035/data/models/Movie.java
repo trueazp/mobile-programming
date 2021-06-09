@@ -1,8 +1,8 @@
 package com.miaowmere.finalproject_h071191035.data.models;
 
 import com.google.gson.annotations.SerializedName;
-import com.miaowmere.finalproject_h071191035.Const;
-import com.miaowmere.finalproject_h071191035.ImageSize;
+import com.miaowmere.finalproject_h071191035.utilities.Const;
+import com.miaowmere.finalproject_h071191035.utilities.ImageSize;
 
 import java.util.List;
 
