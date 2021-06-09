@@ -28,4 +28,6 @@
     <string name="num_label">66</string>
     <string name="season_label">Season</string>
     <string name="cast_title_label">Cast</string>
+    <string name="cast_name_label">Cast Name</string>
+    <string name="cast_character_label">Character</string>
 </resources>

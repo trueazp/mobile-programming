@@ -85,7 +85,7 @@ public class TvShow {
     }
 
     public String getRuntime() {
-        return runtime.length > 0 ? String.format("%s Min Per Ep.", runtime[0]) : "None";
+        return runtime.length > 0 ? String.format("%s Min", runtime[0]) : "None";
     }
 
     public List<Genre> getGenres() {

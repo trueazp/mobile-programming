@@ -1,7 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="ll_extra_info" type="id">ll_extra_info</item>
-    <item name="tv_runtime" type="id">tv_runtime</item>
-    <item name="tv_dot" type="id">tv_dot</item>
-    <item name="tv_vote_count" type="id">tv_vote_count</item>
 </resources>
