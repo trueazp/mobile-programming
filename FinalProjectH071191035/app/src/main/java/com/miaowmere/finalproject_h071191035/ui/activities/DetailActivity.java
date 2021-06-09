@@ -2,6 +2,8 @@ package com.miaowmere.finalproject_h071191035.ui.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,6 +23,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnCastCallback;
+import com.miaowmere.finalproject_h071191035.data.models.Cast;
+import com.miaowmere.finalproject_h071191035.data.models.Genre;
+import com.miaowmere.finalproject_h071191035.ui.adapters.CastAdapter;
+import com.miaowmere.finalproject_h071191035.ui.adapters.GenreAdapter;
 import com.miaowmere.finalproject_h071191035.utilities.ImageSize;
 import com.miaowmere.finalproject_h071191035.R;
 import com.miaowmere.finalproject_h071191035.data.api.repository.MovieRepository;
@@ -30,6 +37,9 @@ import com.miaowmere.finalproject_h071191035.data.models.Movie;
 import com.miaowmere.finalproject_h071191035.data.models.TvShow;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.realm.Realm;
 
 public class DetailActivity extends AppCompatActivity {
@@ -38,15 +48,18 @@ public class DetailActivity extends AppCompatActivity {
             tvLabelFirstAirDate, tvLabelLastAirDate, tvLabelEpisode, tvLabelSeason, tvRating, tvRuntime, tvVoteCount, tvGenresDetail;
     private RatingBar rbRating;
     private ExpandableTextView etvOverview;
+    private ArrayList<String> genres;
     private LinearProgressIndicator linearProgressIndicator;
     private TvShowRepository tvShowRepository;
     private MovieRepository movieRepository;
+    RecyclerView rvGenre;
+    RecyclerView rvCast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        Realm.init(this);
+//        Realm.init(this);
 
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
@@ -72,7 +85,10 @@ public class DetailActivity extends AppCompatActivity {
         tvRating = findViewById(R.id.tv_vote_average_detail);
         tvRuntime = findViewById(R.id.tv_runtime);
         tvVoteCount = findViewById(R.id.tv_vote_count);
-        tvGenresDetail = findViewById(R.id.tv_genres_detail);
+//        tvGenresDetail = findViewById(R.id.tv_genres_detail);
+        genres = new ArrayList<>();
+        rvGenre = findViewById(R.id.rv_genre);
+        rvCast = findViewById(R.id.rv_cast);
         linearProgressIndicator = findViewById(R.id.lpi_detail);
         tvShowRepository = TvShowRepository.getInstance();
         movieRepository = MovieRepository.getInstance();
@@ -140,6 +156,11 @@ public class DetailActivity extends AppCompatActivity {
                     etvOverview.setText(media.getOverview());
                     tvSeason.setText(Integer.toString(media.getNumberOfSeason()));
                     rbRating.setRating(rating);
+                    setGenres(media.getGenres());
+                    Log.d("Genre", media.getGenres().get(0).getName());
+                    rvGenre.setLayoutManager(new LinearLayoutManager(DetailActivity.this, RecyclerView.HORIZONTAL, false));
+                    rvGenre.setAdapter(new GenreAdapter(genres, DetailActivity.this));
+                    loadCast(id, selectedFragment);
                     tvRating.setText(Float.toString(media.getPopularity()));
                     tvRuntime.setText(media.getRuntime());
                     tvVoteCount.setText(media.getVoteCount());
@@ -165,11 +186,16 @@ public class DetailActivity extends AppCompatActivity {
                     Glide.with(DetailActivity.this).load(backdropUri).into(ivBackdrop);
                     tvName.setText(media.getTitle());
                     etvOverview.setText(media.getOverview());
-                    rbRating.setRating(rating);
                     tvLabelEpisode.setVisibility(View.GONE);
                     tvLabelSeason.setVisibility(View.GONE);
                     tvLabelFirstAirDate.setVisibility(View.GONE);
                     tvLabelLastAirDate.setVisibility(View.GONE);
+                    rbRating.setRating(rating);
+                    setGenres(media.getGenres());
+                    Log.d("Genre", media.getGenres().get(0).getName());
+                    rvGenre.setLayoutManager(new LinearLayoutManager(DetailActivity.this, RecyclerView.HORIZONTAL, false));
+                    rvGenre.setAdapter(new GenreAdapter(genres, DetailActivity.this));
+                    loadCast(id, selectedFragment);
                     tvRating.setText(Float.toString(media.getPopularity()));
                     tvRuntime.setText(media.getRuntime());
                     tvVoteCount.setText(media.getVoteCount());
@@ -182,6 +208,43 @@ public class DetailActivity extends AppCompatActivity {
                     // TODO error text
                 }
             });
+        }
+    }
+
+    private void loadCast(Integer id, String selectedFragment) {
+        if (selectedFragment.equals("movie")) {
+            movieRepository.getCast(id, new OnCastCallback() {
+                @Override
+                public void onSuccess(List<Cast> casts, String message) {
+                    Log.d("Cast", casts.get(0).getName());
+                    rvCast.setLayoutManager(new LinearLayoutManager(DetailActivity.this, RecyclerView.HORIZONTAL, false));
+                    rvCast.setAdapter(new CastAdapter(casts, DetailActivity.this));
+                }
+
+                @Override
+                public void onFailure(String message) {
+                    Log.d("Error Fetching", message);
+                }
+            });
+        } else {
+            tvShowRepository.getCast(id, new OnCastCallback() {
+                @Override
+                public void onSuccess(List<Cast> casts, String message) {
+                    rvCast.setLayoutManager(new LinearLayoutManager(DetailActivity.this, RecyclerView.HORIZONTAL, false));
+                    rvCast.setAdapter(new CastAdapter(casts, DetailActivity.this));
+                }
+
+                @Override
+                public void onFailure(String message) {
+                    Log.d("Error Fetching", message);
+                }
+            });
+        }
+    }
+
+    private void setGenres(List<Genre> genreList) {
+        for (int i = 0; i < genreList.size(); i++) {
+            genres.add(genreList.get(i).getName());
         }
     }
 

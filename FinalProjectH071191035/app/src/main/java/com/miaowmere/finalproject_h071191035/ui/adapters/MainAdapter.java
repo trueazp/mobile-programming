@@ -41,7 +41,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MainAdapter.ViewHolder holder, int position) {
         if (tvShowList != null) {
             holder.onBindItemView(tvShowList.get(position));
         } else {

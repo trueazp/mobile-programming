@@ -27,4 +27,5 @@
     <string name="episode_label">Episode</string>
     <string name="num_label">66</string>
     <string name="season_label">Season</string>
+    <string name="cast_title_label">Cast</string>
 </resources>

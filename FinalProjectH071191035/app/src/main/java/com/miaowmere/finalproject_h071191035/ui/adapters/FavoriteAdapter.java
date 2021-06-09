@@ -32,12 +32,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
     @NonNull
     @Override
     public FavoriteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_2, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FavoriteAdapter.ViewHolder holder, int position) {
         holder.onBindItem(favoriteList.get(position));
     }
 

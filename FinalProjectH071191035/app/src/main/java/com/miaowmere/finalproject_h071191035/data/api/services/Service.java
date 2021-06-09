@@ -1,5 +1,6 @@
 package com.miaowmere.finalproject_h071191035.data.api.services;
 
+import com.miaowmere.finalproject_h071191035.data.models.CastResponse;
 import com.miaowmere.finalproject_h071191035.data.models.Movie;
 import com.miaowmere.finalproject_h071191035.data.models.MovieResponse;
 import com.miaowmere.finalproject_h071191035.data.models.TvShow;
@@ -30,6 +31,13 @@ public interface Service {
 
     @GET("movie/{id}")
     Call<Movie> getMovieDetail (
+            @Path("id") int id,
+            @Query("api_key") String apiKey,
+            @Query("language") String language
+    );
+
+    @GET("movie/{id}/credits")
+    Call<CastResponse> getCasts(
             @Path("id") int id,
             @Query("api_key") String apiKey,
             @Query("language") String language

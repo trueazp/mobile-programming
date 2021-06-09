@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 
+import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnCastCallback;
+import com.miaowmere.finalproject_h071191035.data.models.CastResponse;
 import com.miaowmere.finalproject_h071191035.utilities.Const;
 import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnCallback;
 import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnDetailCallback;
@@ -107,5 +109,32 @@ public class TvShowRepository extends Repository<TvShow> {
                 callback.onFailure(t.getLocalizedMessage());
             }
         });
+    }
+
+    public void getCast(int id, final OnCastCallback castCallback) {
+        service.getCasts(id, Const.API_KEY, Const.getLang())
+                .enqueue(new Callback<CastResponse>() {
+                    @Override
+                    public void onResponse(Call<CastResponse> call, Response<CastResponse> response) {
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
+                                if (response.body() != null) {
+                                    castCallback.onSuccess(response.body().getCasts(), response.message());
+                                } else {
+                                    castCallback.onFailure("No Casts");
+                                }
+                            } else {
+                                castCallback.onFailure("response.body() is null");
+                            }
+                        } else {
+                            castCallback.onFailure(response.message() + " : " + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<CastResponse> call, Throwable t) {
+                        castCallback.onFailure(t.getLocalizedMessage());
+                    }
+                });
     }
 }
