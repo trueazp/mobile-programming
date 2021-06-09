@@ -5,8 +5,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.miaowmere.finalproject_h071191035.R;
@@ -20,6 +25,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
+        }
+
         bottomNavigationItemView = findViewById(R.id.bottom_nav);
         bottomNavigationItemView.setOnNavigationItemSelectedListener(this);
         setSelectedItem(bottomNavigationItemView);
@@ -82,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private void setActionBar(String title, int logo) {
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#292929")));
         if (actionBar != null) {
             actionBar.setTitle("\t" + title);
             actionBar.setDisplayShowHomeEnabled(true);
