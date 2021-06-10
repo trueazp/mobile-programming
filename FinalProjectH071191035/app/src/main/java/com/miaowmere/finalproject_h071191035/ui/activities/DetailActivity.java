@@ -25,6 +25,8 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnCastCallback;
 import com.miaowmere.finalproject_h071191035.data.models.Cast;
+import com.miaowmere.finalproject_h071191035.data.models.FavoriteMovie;
+import com.miaowmere.finalproject_h071191035.data.models.FavoriteTvShow;
 import com.miaowmere.finalproject_h071191035.data.models.Genre;
 import com.miaowmere.finalproject_h071191035.ui.adapters.CastAdapter;
 import com.miaowmere.finalproject_h071191035.ui.adapters.GenreAdapter;
@@ -41,6 +43,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmQuery;
 
 public class DetailActivity extends AppCompatActivity {
     private ImageView ivBackdrop, ivPoster;
@@ -52,14 +56,18 @@ public class DetailActivity extends AppCompatActivity {
     private LinearProgressIndicator linearProgressIndicator;
     private TvShowRepository tvShowRepository;
     private MovieRepository movieRepository;
-    RecyclerView rvGenre;
-    RecyclerView rvCast;
+    private RecyclerView rvGenre;
+    private RecyclerView rvCast;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-//        Realm.init(this);
+        Realm.init(DetailActivity.this);
+        String realmTitle = "final project";
+        RealmConfiguration configuration = new RealmConfiguration.Builder().allowWritesOnUiThread(true).name(realmTitle).build();
+        realm = Realm.getInstance(configuration);
 
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
@@ -94,10 +102,35 @@ public class DetailActivity extends AppCompatActivity {
         movieRepository = MovieRepository.getInstance();
     }
 
+    private FavoriteMovie filterFavoriteMovieById(int id) {
+        RealmQuery<FavoriteMovie> query = realm.where(FavoriteMovie.class);
+        query.equalTo("id", getIntent().getIntExtra("ID", 0));
+        FavoriteMovie favoriteMovie = query.findFirst();
+        return favoriteMovie;
+    }
+
+    private FavoriteTvShow filterFavoriteTvShowById(int id) {
+        RealmQuery<FavoriteTvShow> query = realm.where(FavoriteTvShow.class);
+        query.equalTo("id", getIntent().getIntExtra("ID", 0));
+        FavoriteTvShow favoriteTvShow = query.findFirst();
+        return favoriteTvShow;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_detail, menu);
-        // TODO: switch favourite button state
+        String selectedFragment = getIntent().getStringExtra("SELECTED_FRAGMENT");
+        if (selectedFragment.equals("movie")) {
+            FavoriteMovie favoriteMovie = filterFavoriteMovieById(getIntent().getIntExtra("ID", 0));
+            if (favoriteMovie != null) {
+                menu.findItem(R.id.item_favorite).setIcon(R.drawable.ic_favorite);
+            }
+        } else {
+            FavoriteTvShow favoriteTvShow = filterFavoriteTvShowById(getIntent().getIntExtra("ID", 0));
+            if (favoriteTvShow != null) {
+                menu.findItem(R.id.item_favorite).setIcon(R.drawable.ic_favorite);
+            }
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -110,16 +143,46 @@ public class DetailActivity extends AppCompatActivity {
                 mainActivity.putExtra("SELECTED_FRAGMENT", getIntent().getStringExtra("SELECTED_FRAGMENT"));
                 startActivity(mainActivity);
                 return true;
-            case R.id.menu_item_favorite:
-//                if (helper.isFavorite(id)) {
-//                    if (helper.delete(id) > 0) {
-//                        // TODO: Set favorite button state
-//                    }
-//                } else {
-//                    if (helper.insert(tvShow) > 0) {
-//                        // TODO: Set favorite button state
-//                    }
-//                }
+            case R.id.item_favorite:
+                if (getIntent().getStringExtra("SELECTED_FRAGMENT").equals("movie")) {
+                    FavoriteMovie favoriteMovie = filterFavoriteMovieById(getIntent().getIntExtra("ID", 0));
+                    if (favoriteMovie != null) {
+                        realm.executeTransaction(transactionRealm -> {
+                            favoriteMovie.deleteFromRealm();
+                        });
+                        item.setIcon(R.drawable.ic_favorite_border);
+                    } else {
+                        FavoriteMovie movie = new FavoriteMovie();
+                        String title = getIntent().getStringExtra("TITLE");
+                        String posterPath = getIntent().getStringExtra("POSTER_PATH");
+                        int id = getIntent().getIntExtra("ID", 0);
+                        movie.setId(id);
+                        movie.setTitle(title);
+                        movie.setPosterPath(posterPath);
+                        realm.executeTransaction(transactionRealm -> transactionRealm.insert(movie));
+                        Log.d("Favorite Movie", movie.getTitle());
+                        item.setIcon(R.drawable.ic_favorite);
+                    }
+                } else {
+                    FavoriteTvShow favoriteTvShow = filterFavoriteTvShowById(getIntent().getIntExtra("ID", 0));
+                    if (favoriteTvShow != null) {
+                        realm.executeTransaction(transactionRealm -> {
+                            favoriteTvShow.deleteFromRealm();
+                        });
+                        item.setIcon(R.drawable.ic_favorite_border);
+                    } else {
+                        FavoriteTvShow tvShow = new FavoriteTvShow();
+                        String title = getIntent().getStringExtra("TITLE");
+                        String posterPath = getIntent().getStringExtra("POSTER_PATH");
+                        int id = getIntent().getIntExtra("ID", 0);
+                        tvShow.setId(id);
+                        tvShow.setTitle(title);
+                        tvShow.setPosterPath(posterPath);
+                        realm.executeTransaction(transactionRealm -> transactionRealm.insert(tvShow));
+                        Log.d("Favorite Movie", tvShow.getTitle());
+                        item.setIcon(R.drawable.ic_favorite);
+                    }
+                }
                 return true;
             case R.id.item_language_setting:
                 startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));

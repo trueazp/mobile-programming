@@ -9,7 +9,7 @@
     <string name="detail_label">Detail</string>
     <string name="title_label">Movie or TV Show Title</string>
     <string name="duration">66 Min</string>
-        <string name="divider">‎ •</string>
+    <string name="divider">‎ •</string>
     <string name="vote_count">6666 Votes</string>
     <string name="watch_label">Watch Now</string>
     <string name="favorite_label">Favorite</string>
@@ -30,4 +30,7 @@
     <string name="cast_title_label">Cast</string>
     <string name="cast_name_label">Cast Name</string>
     <string name="cast_character_label">Character</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_favorite_label">Favorite is currently empty</string>
 </resources>

@@ -27,17 +27,21 @@ import com.miaowmere.finalproject_h071191035.data.api.repository.MovieRepository
 import com.miaowmere.finalproject_h071191035.data.api.repository.TvShowRepository;
 import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnCallback;
 import com.miaowmere.finalproject_h071191035.data.api.repository.callback.OnSearchCallback;
+import com.miaowmere.finalproject_h071191035.data.models.FavoriteMovie;
+import com.miaowmere.finalproject_h071191035.data.models.FavoriteTvShow;
 import com.miaowmere.finalproject_h071191035.data.models.Movie;
 import com.miaowmere.finalproject_h071191035.data.models.TvShow;
 import com.miaowmere.finalproject_h071191035.ui.activities.DetailActivity;
 import com.miaowmere.finalproject_h071191035.ui.adapters.MainAdapter;
 import com.miaowmere.finalproject_h071191035.ui.adapters.clicklistener.OnItemClickListener;
+import com.miaowmere.finalproject_h071191035.utilities.ImageSize;
 
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-public class MainFragment extends Fragment implements OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
+public class MainFragment extends Fragment implements OnItemClickListener,
+        SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
     private LinearProgressIndicator linearProgressIndicator;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -136,6 +140,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
             movieRepository.getModel(page, new OnCallback<Movie>() {
                 @Override
                 public void onSuccess(int page, List<Movie> movies) {
+                    tvError.setVisibility(View.GONE);
                     if (mainAdapter == null) {
                         mainAdapter = new MainAdapter(null, movies);
                         mainAdapter.setClickListener(MainFragment.this);
@@ -154,12 +159,15 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                 @Override
                 public void onFailure(String message) {
                     Log.d("Error Fetching", message);
+                    tvError.setText(R.string.no_internet_connection);
+                    tvError.setVisibility(View.VISIBLE);
                 }
             });
         } else {
             movieRepository.search(query, page, new OnSearchCallback<Movie>() {
                 @Override
                 public void onSuccess(List<Movie> movies, String message, int page) {
+                    tvError.setVisibility(View.GONE);
                     if (mainAdapter == null) {
                         mainAdapter = new MainAdapter(null, movies);
                         mainAdapter.setClickListener(MainFragment.this);
@@ -176,7 +184,9 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
 
                 @Override
                 public void onFailure(String message) {
-                    // TODO error message
+                    Log.d("Error Fetching", message);
+                    tvError.setText(R.string.no_internet_connection);
+                    tvError.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -188,6 +198,7 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
             tvShowRepository.getModel(page, new OnCallback<TvShow>() {
                 @Override
                 public void onSuccess(int page, List<TvShow> tvShows) {
+                    tvError.setVisibility(View.GONE);
                     if (mainAdapter == null) {
                         Log.d("Debugging", "adapter:null");
                         mainAdapter = new MainAdapter(tvShows, null);
@@ -206,12 +217,15 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                 @Override
                 public void onFailure(String message) {
                     Log.d("Error Fetching", message);
+                    tvError.setText(R.string.no_internet_connection);
+                    tvError.setVisibility(View.VISIBLE);
                 }
             });
         } else {
             tvShowRepository.search(query, page, new OnSearchCallback<TvShow>() {
                 @Override
                 public void onSuccess(List<TvShow> tvShows, String message, int page) {
+                    tvError.setVisibility(View.GONE);
                     if (mainAdapter == null) {
                         mainAdapter = new MainAdapter(tvShows, null);
                         mainAdapter.setClickListener(MainFragment.this);
@@ -229,6 +243,8 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
                 @Override
                 public void onFailure(String message) {
                     Log.d("Error Fetching", message);
+                    tvError.setText(R.string.no_internet_connection);
+                    tvError.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -279,9 +295,21 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
     }
 
     @Override
+    public void onClick(FavoriteMovie favoriteMovie) {
+
+    }
+
+    @Override
+    public void onClick(FavoriteTvShow favoriteTvShow) {
+
+    }
+
+    @Override
     public void onClick(Movie movie) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra("ID", movie.getId());
+        intent.putExtra("TITLE", movie.getTitle());
+        intent.putExtra("POSTER_PATH", movie.getPosterPath(ImageSize.W154));
         intent.putExtra("SELECTED_FRAGMENT", getBundle());
         startActivity(intent);
     }
@@ -290,6 +318,8 @@ public class MainFragment extends Fragment implements OnItemClickListener, Swipe
     public void onClick(TvShow tvShow) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra("ID", tvShow.getId());
+        intent.putExtra("TITLE", tvShow.getName());
+        intent.putExtra("POSTER_PATH", tvShow.getPosterPath(ImageSize.W154));
         intent.putExtra("SELECTED_FRAGMENT", getBundle());
         startActivity(intent);
     }
