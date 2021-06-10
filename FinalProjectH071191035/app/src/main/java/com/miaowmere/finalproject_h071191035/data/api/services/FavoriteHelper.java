@@ -32,8 +32,6 @@ public class FavoriteHelper {
         favoriteMovie.setPosterPath(posterPath);
         favoriteMovie.setTitle(title);
         favoriteMovie.setId(id);
-        realm.executeTransaction(transactionRealm -> {
-            transactionRealm.insert(favoriteMovie);
-        });
+        realm.executeTransaction(transactionRealm -> transactionRealm.insert(favoriteMovie));
     }
 }

@@ -25,13 +25,10 @@ public class SplashScreenActivity extends Activity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
         }
 
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent mainIntent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(mainIntent);
-            }
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            Intent mainIntent = new Intent(SplashScreenActivity.this, MainActivity.class);
+            mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(mainIntent);
         }, 3000);
     }
 }

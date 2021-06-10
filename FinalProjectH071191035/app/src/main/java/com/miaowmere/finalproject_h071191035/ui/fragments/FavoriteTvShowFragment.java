@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.miaowmere.finalproject_h071191035.R;
 import com.miaowmere.finalproject_h071191035.data.models.FavoriteMovie;

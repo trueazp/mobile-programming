@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private void setActionBar(String title, int logo) {
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#292929")));
         if (actionBar != null) {
             actionBar.setTitle("\t" + title);

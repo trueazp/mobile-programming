@@ -39,24 +39,12 @@ public class Movie {
         return overview;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
-    }
-
     public String getRuntime() {
         return runtime != null ? String.format("%s Min", runtime) : "None";
     }
 
-    public void setRuntime(String runtime) {
-        this.runtime = runtime;
-    }
-
     public String getVoteCount() {
         return String.format("%s Votes", voteCount);
-    }
-
-    public void setVoteCount(String voteCount) {
-        this.voteCount = voteCount;
     }
 
     public String getTitle() {
@@ -71,28 +59,12 @@ public class Movie {
         return Const.IMG_URL + size.getValue() + backdropPath;
     }
 
-    public void setBackdropImage(String backdropImage) {
-        this.backdropPath = backdropImage;
-    }
-
     public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
     public String getPosterPath(ImageSize size) {
         return Const.IMG_URL + size.getValue() + posterPath;
-    }
-
-    public void setPosterImage(String posterImage) {
-        this.posterPath = posterImage;
-    }
-
-    public float getPopularity() {
-        return popularity;
     }
 
     public float getVoteAverage() {
@@ -101,9 +73,5 @@ public class Movie {
 
     public List<Genre> getGenres() {
         return genres;
-    }
-
-    public void setGenres(List<Genre> genres) {
-        this.genres = genres;
     }
 }

@@ -93,7 +93,6 @@ public class DetailActivity extends AppCompatActivity {
         tvRating = findViewById(R.id.tv_vote_average_detail);
         tvRuntime = findViewById(R.id.tv_runtime);
         tvVoteCount = findViewById(R.id.tv_vote_count);
-//        tvGenresDetail = findViewById(R.id.tv_genres_detail);
         genres = new ArrayList<>();
         rvGenre = findViewById(R.id.rv_genre);
         rvCast = findViewById(R.id.rv_cast);
@@ -147,9 +146,7 @@ public class DetailActivity extends AppCompatActivity {
                 if (getIntent().getStringExtra("SELECTED_FRAGMENT").equals("movie")) {
                     FavoriteMovie favoriteMovie = filterFavoriteMovieById(getIntent().getIntExtra("ID", 0));
                     if (favoriteMovie != null) {
-                        realm.executeTransaction(transactionRealm -> {
-                            favoriteMovie.deleteFromRealm();
-                        });
+                        realm.executeTransaction(transactionRealm -> favoriteMovie.deleteFromRealm());
                         item.setIcon(R.drawable.ic_favorite_border);
                     } else {
                         FavoriteMovie movie = new FavoriteMovie();
@@ -166,9 +163,7 @@ public class DetailActivity extends AppCompatActivity {
                 } else {
                     FavoriteTvShow favoriteTvShow = filterFavoriteTvShowById(getIntent().getIntExtra("ID", 0));
                     if (favoriteTvShow != null) {
-                        realm.executeTransaction(transactionRealm -> {
-                            favoriteTvShow.deleteFromRealm();
-                        });
+                        realm.executeTransaction(transactionRealm -> favoriteTvShow.deleteFromRealm());
                         item.setIcon(R.drawable.ic_favorite_border);
                     } else {
                         FavoriteTvShow tvShow = new FavoriteTvShow();
@@ -315,6 +310,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setActionBar(String title) {
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#292929")));
         if (actionBar != null) {
             actionBar.setTitle(title);

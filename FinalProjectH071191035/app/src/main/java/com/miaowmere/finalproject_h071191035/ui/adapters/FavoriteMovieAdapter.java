@@ -54,12 +54,12 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
 
         FavoriteMovie favoriteMovie;
         ImageView ivPoster;
-        TextView tvTitle;
+        TextView tvName;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             ivPoster = itemView.findViewById(R.id.iv_poster_favorite);
-            tvTitle = itemView.findViewById(R.id.iv_poster_favorite);
+            tvName = itemView.findViewById(R.id.tv_title_favorite);
             itemView.setOnClickListener(this);
         }
 
@@ -68,7 +68,7 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
             String image = favoriteMovie.getPosterPath(ImageSize.W154);
             String title = favoriteMovie.getTitle();
             Glide.with(itemView.getContext()).load(image).into(ivPoster);
-            tvTitle.setText(title);
+            tvName.setText(title);
         }
 
         @Override

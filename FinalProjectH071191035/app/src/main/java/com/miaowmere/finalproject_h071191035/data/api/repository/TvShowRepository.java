@@ -115,7 +115,7 @@ public class TvShowRepository extends Repository<TvShow> {
         service.getCasts(id, Const.API_KEY, Const.getLang())
                 .enqueue(new Callback<CastResponse>() {
                     @Override
-                    public void onResponse(Call<CastResponse> call, Response<CastResponse> response) {
+                    public void onResponse(@NonNull Call<CastResponse> call, @NonNull Response<CastResponse> response) {
                         if (response.isSuccessful()) {
                             if (response.body() != null) {
                                 if (response.body() != null) {
@@ -132,7 +132,7 @@ public class TvShowRepository extends Repository<TvShow> {
                     }
 
                     @Override
-                    public void onFailure(Call<CastResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<CastResponse> call, @NonNull Throwable t) {
                         castCallback.onFailure(t.getLocalizedMessage());
                     }
                 });

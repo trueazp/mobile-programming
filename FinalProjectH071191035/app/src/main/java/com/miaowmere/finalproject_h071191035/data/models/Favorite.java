@@ -25,15 +25,7 @@ public class Favorite {
         return posterPath;
     }
 
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-    }
-
     public float getRate() {
         return rate;
-    }
-
-    public void setRate(float rate) {
-        this.rate = rate;
     }
 }

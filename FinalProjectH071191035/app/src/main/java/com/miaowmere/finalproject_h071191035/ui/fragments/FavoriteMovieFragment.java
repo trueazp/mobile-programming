@@ -39,7 +39,6 @@ public class FavoriteMovieFragment extends Fragment implements OnItemClickListen
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         Realm.init(getContext());
         String realmTitle = "final project";
         RealmConfiguration configuration = new RealmConfiguration.Builder().allowWritesOnUiThread(true).name(realmTitle).build();
@@ -50,7 +49,6 @@ public class FavoriteMovieFragment extends Fragment implements OnItemClickListen
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         List<FavoriteMovie> movies = (List) realm.where(FavoriteMovie.class).findAll();
-
         if (movies.size() == 0) {
             clFavIsEmpty.setVisibility(View.VISIBLE);
         } else {
@@ -80,16 +78,6 @@ public class FavoriteMovieFragment extends Fragment implements OnItemClickListen
     }
 
     @Override
-    public void onClick(Movie movie) {
-
-    }
-
-    @Override
-    public void onClick(TvShow tvShow) {
-
-    }
-
-    @Override
     public void onClick(FavoriteMovie favoriteMovie) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra("ID", favoriteMovie.getId());
@@ -97,6 +85,16 @@ public class FavoriteMovieFragment extends Fragment implements OnItemClickListen
         intent.putExtra("POSTER_PATH", favoriteMovie.getPosterPath(ImageSize.W154));
         intent.putExtra("SELECTED_FRAGMENT", "movie");
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(Movie movie) {
+
+    }
+
+    @Override
+    public void onClick(TvShow tvShow) {
+
     }
 
     @Override

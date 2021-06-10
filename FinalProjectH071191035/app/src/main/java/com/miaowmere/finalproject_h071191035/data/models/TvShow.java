@@ -68,10 +68,6 @@ public class TvShow {
         return overview;
     }
 
-    public float getPopularity() {
-        return popularity;
-    }
-
     public String getPosterPath(ImageSize size) {
         return Const.IMG_URL + size.getValue() + posterPath;
     }
